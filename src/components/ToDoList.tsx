@@ -12,7 +12,7 @@ function ToDoList() {
   const [category, setCategory] = useRecoilState(selectOption);
   const onInput = (event: React.FormEvent<HTMLSelectElement>) => {
     setCategory(event.currentTarget.value as any);
-    console.log(category);
+    // console.log(category);
   };
   //creating-category
   const [cate, setCate] = useRecoilState(cateTest);
@@ -21,15 +21,16 @@ function ToDoList() {
     setCate((oldValue) =>[
       { label:cateInput, id: Date.now() }, ...oldValue,
     ]);
+    setCategory(cateInput);
     setValue("cateInput", "");
-    console.log(cate);
+    // console.log(cate);
   }
   return (
     <div>
       <form onSubmit={handleSubmit(handleForm)}>
         <input {...register("cateInput", {required:"create a category"})} placeholder='create a categoty' />
       </form> 
-      <select onInput={onInput}>
+      <select value={category} onInput={onInput}>
         {cate?.map((cates) => (
         <option key={cates.id} value={cates.label}>{cates.label}</option>
         ))}

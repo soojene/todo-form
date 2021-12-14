@@ -5,6 +5,7 @@ import { cateTest, IToDo, selectOption, toDoState } from "../atoms";
 function ToDo({ text, category, id }: IToDo) {
     const setToDos = useSetRecoilState(toDoState);
     const cateTests = useRecoilValue(cateTest);
+    const categoryId = useRecoilValue(selectOption);
     const onClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     const {
         currentTarget: { name },
@@ -22,14 +23,14 @@ function ToDo({ text, category, id }: IToDo) {
     return (
     <li>
         <span>{text}</span>
-        {cateTests?.map((cates)=>(
-            cates.id !== category && (
-                <button key={`${id}+${cates.label}`} 
+        {cateTests?.filter((cates)=>(
+            cates.label !== categoryId
+        )).map(cates => (
+            <button key={`${id}+${cates.label}`} 
                 name={`${cates.label}`} 
                 onClick={onClick}>
                     {cates.label}
                 </button>
-            )
         ))}
 
     </li>

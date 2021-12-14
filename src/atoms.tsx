@@ -3,7 +3,7 @@ import { atom, selector } from "recoil";
 export interface IToDo {
     text: string;
     id: number;
-    category:number;
+    category:string;
 }
 
 export const toDoState = atom<IToDo[]>({
@@ -33,7 +33,7 @@ export const cateTest = atom<Icate[]>({
 });
 
 
-export const selectOption = atom<number>({
+export const selectOption = atom<string>({
     key: "selectOptions",
-    default: 0,
+    default: "",
 });
