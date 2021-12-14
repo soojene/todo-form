@@ -29,3 +29,15 @@ export const toDoSelector = selector({
     return toDos.filter((toDo) => toDo.category === category);
     },
 });
+
+//creating-category
+
+interface Icate {
+    text:string;
+    id:number;
+}
+
+export const cateTest = atom<Icate[]>({
+    key: "cateTest",
+    default: [],
+});

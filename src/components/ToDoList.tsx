@@ -1,18 +1,40 @@
 import React from "react";
+import { useForm } from 'react-hook-form';
 import { useRecoilState, useRecoilValue } from "recoil";
-import { Categories, categoryState, toDoSelector } from "../atoms";
+import { Categories, categoryState, cateTest, toDoSelector } from "../atoms";
 import CreateToDo from "./CreateToDo";
 import ToDo from "./Todo";
-
+interface ICateForm {
+  cateInput: string;
+}
 function ToDoList() {
   const toDos = useRecoilValue(toDoSelector);
   const [category, setCategory] = useRecoilState(categoryState);
   const onInput = (event: React.FormEvent<HTMLSelectElement>) => {
     setCategory(event.currentTarget.value as any);
   };
-  console.log(toDos);
+  //creating-category
+  const [cate, setCate] = useRecoilState(cateTest);
+  const {register, handleSubmit, setValue} = useForm<ICateForm>();
+  const handleForm = ({cateInput}: ICateForm) =>{
+    setCate((oldValue) =>[
+      { text:cateInput, id: Date.now() }, ...oldValue,
+    ]);
+    setValue("cateInput", "");
+    console.log(cate);
+  }
   return (
     <div>
+      <form onSubmit={handleSubmit(handleForm)}>
+        <input {...register("cateInput", {required:"create a category"})} placeholder='create a categoty' />
+      </form> 
+      <select>
+        {cate?.map((cates) => (
+        <option key={cates.id} value={cates.text}>{cates.text}</option>
+        ))}
+      </select>
+{/* creating-category */}
+
       <h1>To Dos</h1>
       <hr />
       <select value={category} onInput={onInput}>
@@ -26,6 +48,7 @@ function ToDoList() {
       ))}
     </div>
   );
+
 }
 
 export default ToDoList;
