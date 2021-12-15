@@ -43,7 +43,7 @@ function CreateToDo() {
     setValue("toDo", "");
   };
   return (
-    <form onSubmit={handleSubmit(handleValid)}>
+    <form onSubmit={handleSubmit(handleValid)} autoComplete='off'>
       <InputBox
         {...register("toDo", {
           required: "Please write a To Do",

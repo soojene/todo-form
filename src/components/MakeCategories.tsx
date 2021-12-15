@@ -97,7 +97,7 @@ function MakeCategories (){
     }
     return (
         <Box>
-            <form onSubmit={handleSubmit(handleForm)}>
+            <form onSubmit={handleSubmit(handleForm)} autoComplete='off'>
                 <CateInput {...register("cateInput", {required:"create a category"})} placeholder='Create a category here' />
             </form> 
             {/* <Selection value={category} onInput={onInput}>
