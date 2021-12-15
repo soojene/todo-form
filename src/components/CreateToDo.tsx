@@ -8,6 +8,7 @@ const InputBox = styled.input`
   outline: none;
   padding: 5px 10px;
   border: none;
+  margin-right: 0;
   /* border-bottom-left-radius: 15px; */
 `;
 
@@ -19,6 +20,7 @@ const InputBtn = styled.button`
   border-top-right-radius:15px;
   border-bottom-right-radius: 15px;
   background-color: white;
+  margin-left: 0;
   color: lightgray;
   cursor: pointer;
   :hover{
