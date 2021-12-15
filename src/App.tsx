@@ -1,4 +1,7 @@
+import { useEffect } from 'react';
+import { useRecoilState, useSetRecoilState} from 'recoil';
 import { createGlobalStyle } from "styled-components";
+import { cateTest, selectOption, toDoState } from './atoms';
 import ToDoList from "./components/ToDoList";
 
 const GlobalStyle = createGlobalStyle`
@@ -68,6 +71,33 @@ a {
 
 
 function App() {
+  const [cate, setCate] = useRecoilState(cateTest);
+  const [todo, setTodo] = useRecoilState(toDoState);
+  const setSeletBtn = useSetRecoilState(selectOption);
+  useEffect(()=>{
+    const cateList = localStorage.getItem("category");
+    const todoList = localStorage.getItem("todoList");
+    if(cateList === null){
+        return;
+    }else{
+      setCate(JSON.parse(cateList));
+      setSeletBtn(JSON.parse(cateList)[0]?.label);
+    }
+
+    if(todoList === null){
+      return;
+    }else{
+      setTodo(JSON.parse(todoList));
+    }
+
+    }, []);
+
+  useEffect(()=>{
+    localStorage.setItem("category", JSON.stringify(cate));
+    localStorage.setItem("todoList", JSON.stringify(todo));
+    setSeletBtn(cate[0]?.label);
+  });
+
   return (
     <>
       <GlobalStyle />
