@@ -95,7 +95,7 @@ function App() {
   useEffect(()=>{
     localStorage.setItem("category", JSON.stringify(cate));
     localStorage.setItem("todoList", JSON.stringify(todo));
-    setSeletBtn(cate[0]?.label);
+    // setSeletBtn(cate[0]?.label);
   });
 
   return (
